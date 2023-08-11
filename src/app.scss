@@ -1,35 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.todo {
-  @apply bg-gray-100 p-4 mx-auto max-w-md border rounded-lg;
-
-  &-title {
-    @apply text-3xl font-semibold text-center mb-4;
-  }
-
-  &-form {
-    @apply flex justify-center items-center mb-4;
-  }
-
-  &-input {
-    @apply py-2 px-4 border rounded-l-lg flex-1;
-  }
-
-  &-btn-add {
-    @apply py-2 px-4 bg-blue-500 text-white rounded-r-lg cursor-pointer;
-  }
-
-  &-list {
-    @apply list-none p-0;
-  }
-
-  &-item {
-    @apply p-2 border-b;
-  }
-
-  &-btn-delete {
-    @apply py-1 px-2 bg-red-500 text-white rounded cursor-pointer;
-  }
-}
