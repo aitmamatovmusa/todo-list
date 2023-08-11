@@ -2,19 +2,27 @@ import { useState } from "react"
 import "./todoForm.scss"
 
 function TodoForm() {
-  const [newTodo, setNewTodo] = useState()
+  const [newTodo, setNewTodo] = useState({
+    value: "",
+    completed: false
+  })
   const [todoList, setTodoList] = useState([])
 
   function handleNewTodo(event) {
     setNewTodo({
+      ...newTodo,
       value: event.target.value,
-      completed: false
     })
   }
 
   function createNewTodo(event) {
     event.preventDefault()
-    setTodoList([...todoList, newTodo])
+
+    const newTodoValue = newTodo.value.trim()
+    if (newTodoValue) {
+      setTodoList([...todoList, newTodo])
+      setNewTodo({ ...newTodo, value: "" })
+    }
   }
 
   function completeTodo(idx) {
@@ -40,7 +48,11 @@ function TodoForm() {
     <div className="todo-container">
       <h1 className="todo-title">Todo List</h1>
       <form className="todo-form">
-        <input type="text" className="todo-input" onChange={handleNewTodo} placeholder="Add new todo" />
+        <input
+          type="text" className="todo-input"
+          onChange={handleNewTodo} placeholder="Add new todo"
+          value={newTodo.value}
+        />
         <button onClick={createNewTodo} type="submit" className="todo-btn-add">Add</button>
       </form>
       <ul className="todo-list">
@@ -50,7 +62,7 @@ function TodoForm() {
               key={idx}
               className="todo-item"
             >
-              <div className={todo.completed && 'todo-completed'}>
+              <div className={todo.completed ? 'todo-completed' : ''}>
                 <input
                   type="checkbox"
                   className="mr-2"
