@@ -1,8 +1,8 @@
-import TodoList from '../components/TodoList/TodoList'
+import TodoForm from '../components/TodoForm/TodoForm'
 
 function Home() {
   return (
-    <TodoList />
+    <TodoForm />
   )
 }
 

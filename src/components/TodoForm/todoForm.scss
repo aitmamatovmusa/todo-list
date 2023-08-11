@@ -22,10 +22,14 @@
   }
 
   &-item {
-    @apply p-2 border-b;
+    @apply flex items-center justify-between border-b p-2;
   }
 
   &-btn-delete {
     @apply py-1 px-2 bg-red-500 text-white rounded cursor-pointer;
+  }
+
+  &-completed {
+    @apply line-through text-gray-500;
   }
 }

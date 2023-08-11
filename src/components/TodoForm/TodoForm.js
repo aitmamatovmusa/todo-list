@@ -1,7 +1,7 @@
 import { useState } from "react"
-import "./todoList.scss"
+import "./todoForm.scss"
 
-function TodoList() {
+function TodoForm() {
   const [newTodo, setNewTodo] = useState()
   const [todoList, setTodoList] = useState([])
 
@@ -31,6 +31,11 @@ function TodoList() {
     setTodoList(todos)
   }
 
+  function deleteTodo(idx) {
+    const filteredTodoList = todoList.filter((_, todoIdx) => todoIdx !== idx)
+    setTodoList(filteredTodoList)
+  }
+
   return (
     <div className="todo-container">
       <h1 className="todo-title">Todo List</h1>
@@ -43,17 +48,24 @@ function TodoList() {
           todoList.map((todo, idx) => {
             return <li
               key={idx}
-              className={`todo-item ${todo.completed ? 'line-through text-gray-500' : 'text-black'
-                }`}
+              className="todo-item"
             >
-              <input
-                type="checkbox"
-                className="mr-2"
-                checked={todo.completed}
-                readOnly
-                onClick={() => completeTodo(idx)}
-              />
-              <span className="todo-text">{todo.value}</span>
+              <div className={todo.completed && 'todo-completed'}>
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={todo.completed}
+                  readOnly
+                  onClick={() => completeTodo(idx)}
+                />
+                <span className="todo-text">{todo.value}</span>
+              </div>
+              <button
+                className="todo-btn-delete"
+                onClick={() => deleteTodo(idx)}
+              >
+                Delete
+              </button>
             </li>
           })
         }
@@ -63,4 +75,4 @@ function TodoList() {
   );
 }
 
-export default TodoList
+export default TodoForm
