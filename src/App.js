@@ -1,9 +1,8 @@
-import Home from './pages/Home';
-
 import './app.scss'
+import TodoForm from './features/todo/TodoForm';
 
 function App() {
-  return <Home />
+  return <TodoForm />
 }
 
 export default App;

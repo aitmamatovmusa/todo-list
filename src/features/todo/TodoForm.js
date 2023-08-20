@@ -1,12 +1,16 @@
 import { useState } from "react"
 import "./todoForm.scss"
+import { addTodo, deleteTodo } from "./todoSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 function TodoForm() {
+  const dispatch = useDispatch()
+  const todos = useSelector(state => state.todo.todos)
+
   const [newTodo, setNewTodo] = useState({
     value: "",
     completed: false
   })
-  const [todoList, setTodoList] = useState([])
 
   function handleNewTodo(event) {
     setNewTodo({
@@ -20,28 +24,16 @@ function TodoForm() {
 
     const newTodoValue = newTodo.value.trim()
     if (newTodoValue) {
-      setTodoList([...todoList, newTodo])
-      setNewTodo({ ...newTodo, value: "" })
+      dispatch(addTodo(newTodo))
+      setNewTodo({ value: "", completed: false })
     }
   }
 
   function completeTodo(idx) {
-    const todos = todoList.map((todo, todoIdx) => {
-      if (todoIdx === idx) {
-        return {
-          ...todo,
-          completed: !todo.completed
-        }
-      }
-      return todo
-    })
-
-    setTodoList(todos)
   }
 
-  function deleteTodo(idx) {
-    const filteredTodoList = todoList.filter((_, todoIdx) => todoIdx !== idx)
-    setTodoList(filteredTodoList)
+  function handleDeleteTodo(idx) {
+    dispatch(deleteTodo(idx))
   }
 
   return (
@@ -57,7 +49,7 @@ function TodoForm() {
       </form>
       <ul className="todo-list">
         {
-          todoList.map((todo, idx) => {
+          todos.map((todo, idx) => {
             return <li
               key={idx}
               className="todo-item"
@@ -74,7 +66,7 @@ function TodoForm() {
               </div>
               <button
                 className="todo-btn-delete"
-                onClick={() => deleteTodo(idx)}
+                onClick={() => handleDeleteTodo(idx)}
               >
                 Delete
               </button>
