@@ -1,8 +1,8 @@
 import './app.scss'
-import TodoForm from './features/todo/TodoForm';
+import Todo from './features/todo/Todo';
 
 function App() {
-  return <TodoForm />
+  return <Todo />
 }
 
 export default App;
