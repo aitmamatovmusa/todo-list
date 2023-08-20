@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./todoForm.scss"
-import { addTodo, deleteTodo } from "./todoSlice"
+import { addTodo, completeTodo, deleteTodo } from "./todoSlice"
 import { useDispatch, useSelector } from "react-redux"
 
 function TodoForm() {
@@ -29,7 +29,8 @@ function TodoForm() {
     }
   }
 
-  function completeTodo(idx) {
+  function handleCompleteTodo(idx) {
+    dispatch(completeTodo(idx))
   }
 
   function handleDeleteTodo(idx) {
@@ -60,7 +61,7 @@ function TodoForm() {
                   className="mr-2"
                   checked={todo.completed}
                   readOnly
-                  onClick={() => completeTodo(idx)}
+                  onClick={() => handleCompleteTodo(idx)}
                 />
                 <span className="todo-text">{todo.value}</span>
               </div>
